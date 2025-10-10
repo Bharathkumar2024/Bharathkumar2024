@@ -5,6 +5,8 @@ import Grid from '@mui/material/Grid2';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -16,6 +18,7 @@ import { mockData } from '../../shared/data';
 import { useNotifications } from '../../components/notification/NotificationContext';
 import { v4 as uuid } from 'uuid';
 import jsPDF from 'jspdf';
+import EmergencyButton from '../../components/EmergencyButton';
 
 const COLORS = ['#ff4d6d', '#ff758f', '#ff8fa3', '#ffb3c1', '#c9184a', '#800f2f', '#a4133c', '#590d22'];
 
@@ -54,14 +57,14 @@ const BloodBankDashboard: React.FC = () => {
     }
   };
 
+  const [filterType, setFilterType] = React.useState<string>('All');
+  const [filterStatus, setFilterStatus] = React.useState<string>('All');
+
+  const filtered = preservationList.filter(p => (filterType === 'All' || p.bloodType === filterType) && (filterStatus === 'All' || p.status === filterStatus));
+
   return (
     <Box>
-      <Box display="flex" justifyContent="flex-end" mb={2}>
-        <Button className="pulse-btn" variant="contained" color="error" onClick={() => {
-          push({ id: uuid(), title: 'Emergency Request', message: 'Blood Bank requested O- 6 units', type: 'emergency', createdAt: Date.now(), actions: [{ label: 'Respond', id: 'respond' }, { label: 'Ignore', id: 'ignore' }] });
-          alert('Emergency broadcast sent (mock)');
-        }}>EMERGENCY REQUEST</Button>
-      </Box>
+      <EmergencyButton origin="BloodBank" />
 
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 4 }}>
@@ -108,6 +111,14 @@ const BloodBankDashboard: React.FC = () => {
         <Grid size={{ xs: 12 }}>
           <Card className="glow-card"><CardContent>
             <Typography fontWeight={700} mb={1}>Preservation Blood List (Inventory)</Typography>
+            <Box display="flex" gap={1} mb={1}>
+              <TextField select size="small" label="Blood Type" value={filterType} onChange={(e) => setFilterType(e.target.value)}>
+                {['All','A+','A-','B+','B-','AB+','AB-','O+','O-'].map(bt => <MenuItem key={bt} value={bt}>{bt}</MenuItem>)}
+              </TextField>
+              <TextField select size="small" label="Status" value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
+                {['All','Available','Reserved','Near Expiry','Expired','Dispatched'].map(s => <MenuItem key={s} value={s}>{s}</MenuItem>)}
+              </TextField>
+            </Box>
             <Table size="small">
               <TableHead>
                 <TableRow>
@@ -121,7 +132,7 @@ const BloodBankDashboard: React.FC = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {preservationList.map((b, i) => (
+                {filtered.map((b, i) => (
                   <TableRow key={i} sx={{ backgroundColor: b.status === 'Expired' ? 'rgba(255,77,77,0.08)' : b.status === 'Near Expiry' ? 'rgba(255,214,10,0.08)' : 'transparent' }}>
                     <TableCell>{b.bloodType}</TableCell>
                     <TableCell>{b.units}</TableCell>

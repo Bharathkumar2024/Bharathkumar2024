@@ -5,6 +5,8 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid2';
+import CardActions from '@mui/material/CardActions';
+import TextField from '@mui/material/TextField';
 import { useNotifications } from '../../components/notification/NotificationContext';
 
 const DonorDashboard: React.FC = () => {
@@ -18,10 +20,12 @@ const DonorDashboard: React.FC = () => {
         <Grid size={{ xs: 12, md: 6 }}>
           <Card className="glow-card"><CardContent>
             <Typography fontWeight={700}>Profile</Typography>
-            <Typography variant="body2">Blood Group: O+</Typography>
-            <Typography variant="body2">Last Donation Date: 2025-08-05</Typography>
-            <Typography variant="body2">City: Metropolis</Typography>
-            <Button variant="contained" color="error" sx={{ mt: 1 }}>Update</Button>
+            <TextField size="small" label="Blood Group" defaultValue="O+" fullWidth sx={{ mt: 1 }} />
+            <TextField size="small" label="Last Donation Date" type="date" defaultValue="2025-08-05" fullWidth InputLabelProps={{ shrink: true }} sx={{ mt: 1 }} />
+            <TextField size="small" label="City" defaultValue="Metropolis" fullWidth sx={{ mt: 1 }} />
+            <CardActions>
+              <Button variant="contained" color="error">Save</Button>
+            </CardActions>
           </CardContent></Card>
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>

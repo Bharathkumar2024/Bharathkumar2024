@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid2';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
+import EmergencyButton from '../../components/EmergencyButton';
 import Chip from '@mui/material/Chip';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
@@ -47,12 +48,7 @@ const HospitalDashboard: React.FC = () => {
 
   return (
     <Box>
-      <Box display="flex" justifyContent="flex-end" mb={2}>
-        <Button className="pulse-btn" variant="contained" color="error" onClick={() => {
-          push({ id: uuid(), title: 'Emergency Request', message: 'Hospital requested immediate A+ 4 units', type: 'emergency', createdAt: Date.now(), actions: [{ label: 'Respond', id: 'respond' }, { label: 'Ignore', id: 'ignore' }] });
-          alert('Emergency broadcast sent (mock)');
-        }}>EMERGENCY REQUEST</Button>
-      </Box>
+      <EmergencyButton origin="Hospital" />
 
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 6 }}>

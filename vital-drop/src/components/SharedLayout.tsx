@@ -3,9 +3,7 @@ import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import Badge from '@mui/material/Badge';
+import NotificationBell from './notification/NotificationBell';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { NotificationContextProvider, useNotifications } from './notification/NotificationContext';
@@ -26,11 +24,7 @@ const HeaderBar: React.FC = () => {
         {!isLanding && (
           <Button color="inherit" onClick={() => navigate('/')}>Home</Button>
         )}
-        <IconButton color="inherit" aria-label="notifications">
-          <Badge badgeContent={unreadCount} color="error" className={unreadCount ? 'notification-blink' : ''}>
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
+        <NotificationBell />
       </Toolbar>
     </AppBar>
   );

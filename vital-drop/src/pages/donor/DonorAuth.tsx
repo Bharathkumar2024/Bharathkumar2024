@@ -15,7 +15,7 @@ const DonorAuth: React.FC = () => {
   return (
     <Box maxWidth={560} mx="auto" className="glow-card" p={3}>
       <Typography variant="h5" mb={2} fontWeight={700}>Donor Access</Typography>
-      <Tabs value={tab} onChange={(_, v) => setTab(v)} textColor="error" indicatorColor="error" sx={{ mb: 2 }}>
+      <Tabs value={tab} onChange={(_, v) => setTab(v)} textColor="primary" indicatorColor="primary" sx={{ mb: 2 }}>
         <Tab label="Login (OTP)" />
         <Tab label="Signup" />
       </Tabs>

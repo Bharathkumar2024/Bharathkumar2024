@@ -12,9 +12,8 @@ import SharedLayout from './components/SharedLayout';
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
-
       <Route element={<SharedLayout />}>        
+        <Route path="/" element={<LandingPage />} />
         <Route path="/hospital/auth" element={<HospitalAuth />} />
         <Route path="/hospital/dashboard" element={<HospitalDashboard />} />
 
