@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+
+:root {
+  --vital-red: #d90429;
+  --vital-dark: #0b0b0d;
+  --vital-light: #fff6f6;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+  color: var(--vital-light);
+  background: radial-gradient(1000px 600px at 70% 20%, rgba(217,4,41,.25), transparent 60%),
+              radial-gradient(800px 500px at 10% 80%, rgba(217,4,41,.2), transparent 60%),
+              linear-gradient(180deg, #180309, #070709 60%);
+  overflow-x: hidden;
+}
+
+/* Animated red atmospheric waves */
+.bg-waves::before, .bg-waves::after {
+  content: "";
+  position: fixed;
+  left: -10%; right: -10%;
+  height: 40vh;
+  pointer-events: none;
+  background: radial-gradient(60% 120% at 50% 120%, rgba(217,4,41,0.35), rgba(217,4,41,0));
+  filter: blur(30px);
+  animation: floatWave 12s ease-in-out infinite;
+  z-index: -1;
+}
+.bg-waves::before { bottom: -5%; animation-delay: -2s; }
+.bg-waves::after { top: -5%; animation-delay: -6s; }
+
+@keyframes floatWave {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+  50% { transform: translateY(-10px) scale(1.05); opacity: 1; }
+}
+
+/* Vital Drop blinking title */
+.vital-title {
+  font-weight: 800;
+  font-size: clamp(36px, 4vw, 56px);
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(217,4,41,0.7), 0 0 30px rgba(217,4,41,0.3);
+  color: #fff;
+  animation: blink 2s steps(2, end) infinite;
+}
+
+@keyframes blink {
+  0%, 49% { color: #fff; }
+  50%, 100% { color: #ffe6e6; }
+}
+
+/* Buttons and pulses */
+.pulse-btn {
+  position: relative;
+  overflow: hidden;
+}
+.pulse-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(217,4,41,0.6);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(217,4,41,0.6); }
+  70% { box-shadow: 0 0 0 15px rgba(217,4,41,0); }
+  100% { box-shadow: 0 0 0 0 rgba(217,4,41,0); }
+}
+
+.glow-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(217,4,41,0.35);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  box-shadow: 0 10px 25px rgba(217,4,41,0.15), inset 0 0 25px rgba(217,4,41,0.05);
+}
+.glow-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 80, 100, 0.9);
+  box-shadow: 0 20px 40px rgba(217,4,41,0.3), 0 0 25px rgba(217,4,41,0.4);
+}
+
+.arrow-blink {
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.arrow-blink::after {
+  content: '➜';
+  animation: arrow 1.2s infinite;
+}
+@keyframes arrow { 0%, 100% { opacity: .2; transform: translateX(0);} 50% { opacity: 1; transform: translateX(6px);} }
+
+/** Mobile-first utilities */
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 16px; }
+.row { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 640px) { .row.sm-2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 960px) { .row.md-3 { grid-template-columns: repeat(3, 1fr); } }
+
+header.app-header { position: sticky; top: 0; backdrop-filter: blur(8px); z-index: 10; border-bottom: 1px solid rgba(255,255,255,0.08); }
+nav.navbar { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; }
+
+.notification-blink { animation: blink 1.2s steps(2, end) infinite; }

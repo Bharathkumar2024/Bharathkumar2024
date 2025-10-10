@@ -1,0 +1,62 @@
+/* Global animations and effects */
+
+@keyframes blinkRed {
+  0%, 100% { opacity: 1; text-shadow: 0 0 12px rgba(255, 0, 0, 0.9); }
+  50% { opacity: 0.85; text-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
+}
+
+@keyframes softGlow {
+  0% { box-shadow: 0 0 0 rgba(255,0,0,0.0); }
+  50% { box-shadow: 0 0 24px rgba(255,0,0,0.35); }
+  100% { box-shadow: 0 0 0 rgba(255,0,0,0.0); }
+}
+
+@keyframes floatY {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes waveMove {
+  0% { background-position-x: 0; }
+  100% { background-position-x: 1000px; }
+}
+
+.vd-blink-title { animation: blinkRed 1.6s infinite; }
+.vd-soft-glow { animation: softGlow 2.2s infinite; }
+.vd-float { animation: floatY 4s ease-in-out infinite; }
+
+/* Buttons */
+.vd-pulse-button {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  animation: softGlow 2.2s infinite;
+}
+
+/* Full-screen red atmospheric bg with parallax and wave overlay */
+.vd-red-bg {
+  min-height: 100vh;
+  background: radial-gradient(1200px 800px at 10% 10%, rgba(255, 60, 60, 0.35), transparent),
+              radial-gradient(1000px 600px at 90% 30%, rgba(220, 0, 0, 0.28), transparent),
+              linear-gradient(120deg, #1a0000, #2a0000 30%, #3b0000 60%, #520000);
+  background-attachment: fixed;
+  position: relative;
+}
+
+.vd-red-bg::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0; height: 120px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100" preserveAspectRatio="none"><path d="M0,0 C300,80 900,20 1200,70 L1200,100 L0,100 Z" fill="rgba(255,0,0,0.25)"/></svg>');
+  background-size: 1000px 100px;
+  animation: waveMove 12s linear infinite;
+  pointer-events: none;
+}
+
+/* Card hover */
+.vd-role-card:hover { box-shadow: 0 0 24px rgba(255,0,0,0.35); transform: translateY(-3px); }
+
+/* Glowing border */
+.vd-glow-border { box-shadow: 0 0 0 1px rgba(255,0,0,0.45), 0 0 16px rgba(255,0,0,0.25); }
