@@ -1,0 +1,47 @@
+/* Global resets and mobile-first typography */
+:root {
+  --brand-red: #cc0a2f;
+  --brand-red-600: #b00727;
+  --brand-red-700: #91061f;
+  --brand-rose: #fd4b5b;
+  --bg-dark: #0c0c0f;
+  --text: #f3f5f7;
+  --muted: #9aa4ad;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background: radial-gradient(1200px 600px at 70% 10%, rgba(255, 0, 0, 0.06), transparent),
+              radial-gradient(1400px 800px at 0% 100%, rgba(255, 0, 0, 0.08), transparent),
+              linear-gradient(180deg, #130103, #090a0f 60%, #06070b);
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { font: inherit; }
+
+.container { width: min(1200px, 92vw); margin: 0 auto; }
+
+/* Mobile-first headings */
+h1 { font-size: clamp(1.6rem, 5vw, 2.6rem); margin: 0.5rem 0; }
+h2 { font-size: clamp(1.3rem, 4vw, 2rem); margin: 0.5rem 0; }
+p { color: var(--muted); line-height: 1.6; }
+
+/* Utility */
+.card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.fixed-top-right {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+}
